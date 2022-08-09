@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-#%h)^nfj46cflt7%r6u#^*a_rng&*fmr^(nx+d2i5lc1zyjw_8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['mysterious-sierra-78071.herokuapp.com',
+ALLOWED_HOSTS = ['piggimart.herokuapp.com',
                  'piggimart.com', 'www.piggimart.com']
 
 STRIPE_PUB_KEY = 'pk_test_51LLCFxIhfxZGpACagCmBvIKG77uffGGGpdMIFEYP8undZtWXPF3kLzTogOtMXAkp5pyyvrRcUFnlAIYNmYtdQv1k001Kj3FWnQ'
