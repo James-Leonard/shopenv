@@ -23,9 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-#%h)^nfj46cflt7%r6u#^*a_rng&*fmr^(nx+d2i5lc1zyjw_8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mysterious-sierra-78071.herokuapp.com',
+                 'piggimart.com', 'www.piggimart.com']
 
 STRIPE_PUB_KEY = 'pk_test_51LLCFxIhfxZGpACagCmBvIKG77uffGGGpdMIFEYP8undZtWXPF3kLzTogOtMXAkp5pyyvrRcUFnlAIYNmYtdQv1k001Kj3FWnQ'
 STRIPE_SECRET_KEY = 'sk_test_51LLCFxIhfxZGpACat3ECpZAeehGVGdADb0AxZ8uVT1fiUAULEEh9Fb4Yu1fWXogBbieCHYFdsrcKfr4lnaKtuxhn00DsmOEEjM'
