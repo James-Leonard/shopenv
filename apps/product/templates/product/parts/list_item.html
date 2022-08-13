@@ -1,15 +1,27 @@
-<div class="column is-3 product-list-item">
-    <div class="box">
-          <figure class="image is-4by3 mb-4">
-                <img src="{{ product.get_thumbnail }}">
-          </figure>
-
-          <h2 class="subtitle">{{ product.title }}</h2>
-
-          <h3 class="price is-size-6 mb-5">${{ product.price}}</h3>
-
-          <hr>
-
-          <a href="{% url 'product' product.category.slug product.slug %}" class="button is-dark is-uppercase">View</a>
-    </div>
-</div>
+<section class="blog-posts">
+      <div class="container">
+        <div class="columns">
+          <div class="column is-10 is-offset-1">
+            <div class="columns featured-post is-multiline">
+              <div class="column is-12 post">
+                <article class="columns featured">
+                  <div class="column is-7 post-img ">
+                        <img src="{{ product.get_thumbnail }}">
+                  </div>
+                  <div class="column is-5 featured-content va">
+                    <div>
+                      <p class="heading post-category">Category Name</p>
+                      <p class="title post-title">{{ product.title }}</p>
+                      <p class="post-excerpt">₦{{ product.price}}</p>
+                      <a href="{% url 'product' product.category.slug product.slug %}" class="button is-primary is-uppercase">View</a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <hr>  
+            </div>
+          </div>
+        </div>
+  
+    </section>

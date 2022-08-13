@@ -21,7 +21,7 @@ def become_vendor(request):
 
             vendor = Vendor.objects.create(name=user.username, created_by=user)
 
-            return redirect('frontpage')
+            return redirect('vendor_admin')
     else:
         form = UserCreationForm()
 

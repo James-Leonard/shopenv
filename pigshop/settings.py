@@ -10,11 +10,32 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
-#import django_heroku
+
 import smtplib
 from pathlib import Path
 import os
 
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'debug.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -28,8 +49,8 @@ SECRET_KEY = 'django-insecure-#%h)^nfj46cflt7%r6u#^*a_rng&*fmr^(nx+d2i5lc1zyjw_8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['piggimart.herokuapp.com',
-                 'piggimart.com', 'www.piggimart.com']
+ALLOWED_HOSTS = ['https://piggimart.com.ng/', 'https://www.piggimart.com.ng/',
+                 'shopenv.eba-qngt2xjk.af-south-1.elasticbeanstalk.com', 'localhost', ]
 
 STRIPE_PUB_KEY = 'pk_test_51LLCFxIhfxZGpACagCmBvIKG77uffGGGpdMIFEYP8undZtWXPF3kLzTogOtMXAkp5pyyvrRcUFnlAIYNmYtdQv1k001Kj3FWnQ'
 STRIPE_SECRET_KEY = 'sk_test_51LLCFxIhfxZGpACat3ECpZAeehGVGdADb0AxZ8uVT1fiUAULEEh9Fb4Yu1fWXogBbieCHYFdsrcKfr4lnaKtuxhn00DsmOEEjM'
@@ -66,6 +87,7 @@ INSTALLED_APPS = [
     'apps.order',
     'apps.vendor',
     'apps.product',
+    'bulma',
 ]
 
 MIDDLEWARE = [
@@ -158,5 +180,3 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# django_heroku.settings(locals())

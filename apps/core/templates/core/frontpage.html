@@ -1,13 +1,43 @@
 {% extends 'core/base.html' %}
 {% block title %}Welcome | {% endblock %}
 {% block content %}
-<div class="columns is-multiline mb-6">
-      <div class="column is-12 has-text-centered mt-6 mb-6">
-            <h2 class="is-size-3">Newest products</h2>
-
-            {% for product in newest_products %}
+  <div class="has-text-centered">
+    <div id="hero-input-group" class="field has-addons has-addons-centered">
+      <form method="get" action="{% url 'search' %}">
+        <div class="field has-addons">
+          <div class="control">
+            <input type="text" class="input is-medium" placeholder="Search..." name="query">
+          </div>
+          <div class="control">
+            <button class="button is-medium is-primary is-uppercase">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <div class="columns">
+    <div class="column is-2">
+        <aside class="is-medium menu">
+          <p class="menu-label">
+            categories
+            <hr>
+          </p>
+          {% for category in menu_categories %}
+            <a href="{% url 'category' category.slug %}" class="button is-medium is-primary mb-2 is-uppercase">{{ category.title }}</a>
+          {% endfor %}    
+        </aside>
+    </div>
+    <div class="column is-10">
+      <div class="content is-medium">
+        <h3 class="title is-3">Newest products</h3>
+          <div class="box columns is-multiline mb-6">
+                  {% for product in newest_products %}
                   {% include 'product/parts/list_item.html' %}
             {% endfor %}
+          </div>       
       </div>
-</div>
+    </div>
+  </div>
+
       {% endblock %}

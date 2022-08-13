@@ -7,70 +7,194 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    
     <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+    
+   
 
     <title>{% block title %}{% endblock %}Piggimart</title>
-
+  
     <script src="{% static 'scripts/main.js' %}"></script>
+    <script src="https://kit.fontawesome.com/21c4ec98c2.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <nav class="navbar is-dark">
-      <div class="navbar-brand">
-        <a href="/" class="navbar-item"><strong>Piggimart</strong></a>
-
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="main-navbar">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-
-      <div class="navbar-menu" id="main-navbar">
-        <div class="navbar-start">
-          <div class="navbar-item">
-          <form method="get" action="{% url 'search' %}">
-            <div class="field has-addons">
-              <div class="control">
-                <input type="text" class="input" placeholder="Search..." name="query">
-              </div>
-              <div class="control">
-                <button class="button is-dark is-uppercase">Search</button>
+      <div class="container">
+        <div class="navbar-brand">
+          <a href="/" class="navbar-item is-size-5 has-text-weight-semibold"><strong>Piggimart</strong></a>
+          <a href="{% url 'cart' %}" class="button is-light">Cart{% if cart %} ({{ cart|length }}){% endif %}
+            <i class="fas fa-shopping-cart"></i>
+          </a>
+          <span class="navbar-burger burger" data-target="navbarMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenu" class="navbar-menu">
+          <div class="navbar-end">
+            <a href="/" class="navbar-item is-active is-size-5 has-text-weight-semibold">
+              Home
+            </a>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link is-size-5 has-text-weight-semibold">
+                Shop
+              </a>
+              <div class="navbar-dropdown">
+                <a href="{% url 'vendor_admin' %}" class="navbar-item">
+                  My account
+                </a>
+                <a href="{% url 'cart' %}" class="navbar-item">
+                  My Cart
+                </a>
               </div>
             </div>
-          </form>
-          </div>
-        </div>
-        <div class="navbar-end">
-          {% for category in menu_categories %}
-            <a href="{% url 'category' category.slug %}" class="navbar-item">{{ category.title }}</a>
-          {% endfor %}
-          <a href="{% url 'contact' %}" class="navbar-item">Contact</a>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link is-size-5 has-text-weight-semibold">
+                How it works
+              </a>
+              <div class="navbar-dropdown">
+                <a class="navbar-item">
+                  How to sale Pigs in Piggimart
+                </a>
+                <a class="navbar-item">
+                  How to buy Pigs in Piggimart
+                </a>
+              </div>
+            </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link is-size-5 has-text-weight-semibold">
+                Contact
+              </a>
+      
+              <div class="navbar-dropdown">
+                <a class="navbar-item">
+                  About us
+                </a>
+                <a class="navbar-item">
+                  Privacy Policy
+                </a>
+                <a class="navbar-item">
+                  Refund
+                </a>
+                <hr class="navbar-divider">
+                <a href="{% url 'contact' %}" class="navbar-item"> Report an issue</a>
+              </div>
+            </div>
 
-          <div class="navbar-item">
-            <a href="{% url 'cart' %}" class="button is-dark">Cart{% if cart %} ({{ cart|length }}){% endif %}</a>
+            <div class="buttons">
+              {% if request.user.is_authenticated %}
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link is-size-5 has-text-weight-semibold">
+                Account
+                </a>
+                <div class="navbar-dropdown">
+                    <a class="navbar-item">
+                    Dashboard
+                    </a>
+                    <a class="navbar-item">
+                    Profile <span class="tag is-primary"> coming soon</span>
+                    </a>
+                    <a href="{% url 'edit_vendor' %}" class="navbar-item">
+                    Settings
+                    </a>
+                    <hr class="navbar-divider">
+                    <a href="{% url 'logout' %}" class="navbar-item">
+                    Logout
+                    </a>
+                </div>
+              </div>
+               {% else %}
+              <a href="{% url 'login' %}" class="button is-primary">
+                <strong>Hello, Sign in</strong>
+              </a>
+               {% endif %}
+            </div>
           </div>
         </div>
       </div>
     </nav>
-   <section class="section">
-    <div class="container">
+
+ 
+      <div class="box cta">
+        <p class="has-text-centered">
+          <span class="tag is-primary">New</span> May We Introduce New Features of Piggimart  🎁
+        </p>
+      </div>
+  
+   
+  
+    <div class="container is-fluid">
       {% block content %}
       {% endblock %}
     </div>
-   </section>
+  
+    <section class="section has-background-primary mt-4">
+      <div class="container">
+        <div class="is-vcentered columns is-multiline">
+          <div class="column is-12  mb-4">
+            {% if request.user.is_authenticated %}
+            <h1 class="has-text-white has-text-centered mt-2 mb-3 is-size-1 is-size-3-mobile has-text-weight-bold">
+              Start selling today
+            </h1>
+            <p class="has-text-white has-text-centered">Put your products in front of the millions of customers who search Piggimart.com every day.</p>
+             {% else %}
+            <h1 class="has-text-white has-text-centered mt-2 mb-3 is-size-1 is-size-3-mobile has-text-weight-bold">
+              Become a
+Piggimart seller
+            </h1>
+            <p class="has-text-white has-text-centered">More than half the units sold in our stores are from independent sellers.</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </section>
 
-   <footer class="footer">
-    <h3 class="is-size-4 mb-4">Pigmart</h3>
 
-    {% if request.user.is_authenticated %}
-    <a href="{% url 'vendor_admin' %}">Vendor admin</a>
-    {% else %}
-    <a href="{% url 'become_vendor' %}">Become vendor</a>
-    {% endif %}
-    <hr>
-    <a href="{% url 'vendors' %}">Vendors</a>
-   </footer>
+    <footer class="section">
+      <div class="container">
+        <div class="pb-5 is-flex is-flex-wrap-wrap is-justify-content-between is-align-items-center">
+          <div class="mr-auto mb-2">
+            <h1 class="is-size-4 mb-4">Piggimart</h1>
+          </div>
+          <div>
+            <ul class="is-flex is-flex-wrap-wrap is-align-items-center is-justify-content-center">
+              <li class="mr-4"><a class="button is-white" href="#">About</a></li>
+              <li class="mr-4"><a class="button is-white" href="#">Privacy Policy</a></li>
+              <li class="mr-4"><a class="button is-white" href="#">FAQ</a></li>
+              {% if request.user.is_authenticated %}
+              <li class="mr-4"><a href="{% url 'vendor_admin' %}">Vendor admin</a></li> 
+               {% else %}
+               <li class="mr-4"><a href="{% url 'become_vendor' %}">Become vendor</a></li>
+               {% endif %}
+              <li class="mr-4">  <a href="{% url 'vendors' %}">Vendors</a></li>
+              <li class="mr-4"><a class="button is-white" href="#">Refund</a></li>
+              <li class="mr-4"><a class="button is-white" href="#">Contact us</a></li>
+             
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="pt-5" style="border-top: 1px solid #dee2e6;"></div>
+      <div class="container">
+        <div class="is-flex-tablet is-justify-content-between is-align-items-center">
+          <p>Founded by Omarand Blasius | All rights reserved © Piggimart 2022</p>
+          <div class="py-2 is-hidden-tablet"></div>
+          <div class="ml-auto">
+            <a class="mr-4 is-inline-block" href="#">
+              <i class="fa fa-facebook-official" aria-hidden="true"></i>
+             </a>
+            <a class="mr-4 is-inline-block" href="#">
+              <i class="fa-brands fa-twitter"></i></a>
+            <a class="mr-4 is-inline-block" href="#">
+              <i class="fa-brands fa-instagram"></i></a>
+            <a class="is-inline-block" href="#">
+              <i class="fa-brands fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+    </footer>
 
    {% block scripts %}
    {% endblock %}

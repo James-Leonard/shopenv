@@ -26,7 +26,7 @@ def cart_detail(request):
             try:
                 charge = stripe.Charge.create(
                     amount=int(cart.get_total_cost() * 100),
-                    currency='USD',
+                    currency='NGN',
                     description='Charge from PiggiMart',
                     source=stripe_token
                 )
